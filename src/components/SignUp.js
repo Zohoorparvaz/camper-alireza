@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import bgImage from "../images/bokeh-wallpaper-2.jpg"
-import { Opacity } from '@mui/icons-material';
 
 function Copyright(props) {
   return (
@@ -30,12 +29,28 @@ const theme = createTheme();
 
 export default function SignUp() {
   const handleSubmit = (event) => {
-    event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    let firstName = data.get('firstName');
+    let lastName = data.get('lastName');
+    let email = data.get('email');
+    let password = data.get('password');
+
+    event.preventDefault();
+    fetch("http://localhost:5000/register", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/Json'
+      },
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      })
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
   };
 
   return (
