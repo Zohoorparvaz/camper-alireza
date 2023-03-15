@@ -1,13 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
+import SignUp from './components/SignUp'
+import CssBaseline from '@mui/material/CssBaseline';
+
 
 function App() {
   return (
     <div className="App">
-        <p>
-          Hello world
-        </p>
+      <CssBaseline />
 
+      <SignUp />
     </div>
   );
 }
