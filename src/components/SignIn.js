@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import bgImage from "../images/bokeh-wallpaper-2.jpg"
-import './SignIn'
+import './SignUp'
 
 function Copyright(props) {
   return (
@@ -28,27 +28,21 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function SignIn() {
   const handleSubmit = (event) => {
     const data = new FormData(event.currentTarget);
-    let firstName = data.get('firstName');
-    let lastName = data.get('lastName');
     let email = data.get('email');
     let password = data.get('password');
-    let updates = data.has('allowExtraEmails');
 
     event.preventDefault();
-    fetch("http://localhost:5000/register", {
+    fetch("http://localhost:5000/login", {
       method: 'POST',
       headers: {
         'Content-Type': 'Application/Json'
       },
       body: JSON.stringify({
-        firstName: firstName,
-        lastName: lastName,
         email: email,
         password: password,
-        updates: updates
       })
     })
       .then(response => response.json())
@@ -75,31 +69,10 @@ export default function SignUp() {
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
           </Avatar>
           <Typography component="h1" variant="h5">
-            Resgister as New User
+            Sign in
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={1}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="family-name"
-                  name="lastName"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   autoComplete="email"
@@ -123,8 +96,8 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox name="allowExtraEmails" value="allowExtraEmails" color="primary" />}
-                  label="I want to receive updates via email."
+                  control={<Checkbox value="rememberMe" color="primary" />}
+                  label="Save my login info on browser so I won't enter them everytime!"
                 />
               </Grid>
             </Grid>
@@ -134,12 +107,12 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Login
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
-                  Already have an account? Sign in!
+                  Do not have an account? Register!
                 </Link>
               </Grid>
             </Grid>

@@ -12,9 +12,14 @@ app.get('*', (req, res) => {
   res.redirect('/signin')
 })
 
+app.get('/signin', (req, res) => {
+  const { email, password } = req.body;
+  console.log(email, password)
+})
+
 app.post('/register', (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
-  console.log(firstName, lastName, email, password)
+  const { firstName, lastName, email, password, updates } = req.body;
+  console.log(firstName, lastName, email, password, updates);
 
 })
 
